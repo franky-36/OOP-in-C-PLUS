@@ -1,11 +1,11 @@
 #include <iostream>
-#include<string.h>
+#include<string>
 #include <fstream>
 
 class Records {
 protected:
     string clientName;
-    string itemName\;
+    string itemName;
     int price;
     int quantity;
     int amount;
@@ -38,10 +38,7 @@ public:
     void savetoFile(ofstream &file) {
         file << clientName << ' ' << itemName\ << ' ' << price << ' ' << quantity << '\n';
     }
-};
 
-class Data : public Records {
-public:
     void readFromFile(ifstream &file) {
         string fname, item;
         int price, quantity;
@@ -72,26 +69,24 @@ int main() {
     cout<<"Enter billing to Enter Data."<<endl;
     cout<<"Enter access to Access Data."<<endl;
     cin>>choice;
-    
-    for (auto &c : choice) c = tolower(c);  // Convert choice to lowercase
 
     if (choice == "billing") {
+
         char ch;
-        Billing billing;
         do {
-            billing.input();
-            billing.display();
-            billing.saveToFile(file);
+            b.input();
+            b.display();
+            b.saveToFile(file);
 
             cout << "Enter Y if you want to enter again\n";
             cin >> ch;
-            cin.ignore();  // Clear newline character from the input buffer
+            cin.ignore();
         } while (ch == 'y' || ch == 'Y');
+
     } else if (choice == "access") {
         file.clear();  // Clear EOF flag if present
-        file.seekg(0); // Rewind to the start of the file
-        Data data;
-        data.readFromFile(file);
+        file.seekg(0);
+        b.readFromFile(file);
     } else {
         cout << "Wrong word entered\n";
     }
